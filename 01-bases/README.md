@@ -51,15 +51,15 @@ npm run dev
 ```html
 <script>
 	export let name;
-	let counter = 0;
+	let contador = 0;
 	const aumentar = () => {
-		counter ++
+		contador ++
 	}
 </script>
 
 <main>
 	<h1>Hello {name}!</h1>
-	<h2>Counter: {counter}</h2>
+	<h2>Counter: {contador}</h2>
 	<button on:click={aumentar}>Aumentar</button>
 </main>
 
@@ -69,6 +69,72 @@ npm run dev
 	}
 </style>
 ```
+
+## Llaves
+Las llaves nos permiten escribir expresiones JS con Svelte y también podemos utilizarlas como atributos dinámicos:
+
+```html
+<h3>{contador < 10 ? 'es menor a 10' : 'es mayor o igual a 10'}</h3>
+<h3>El doble es: {contador * 2}</h3>
+```
+
+```html
+<script>
+	let contador = 0;
+	let colorText = 'text-primary';
+
+	const aumentar = () => {
+		contador ++
+		if(contador >= 10){
+			colorText = 'text-danger'
+		}
+	}
+
+</script>
+
+<main class="container text-center mt-5">
+	<h1 class={colorText}>Counter: {contador}</h1>
+	<button class="btn btn-primary my-5" on:click={aumentar}>Aumentar</button>
+	<h3>{contador < 10 ? 'es menor a 10' : 'es mayor o igual a 10'}</h3>
+	<h3>El doble es: {contador * 2}</h3>
+</main>
+```
+
+## $: Declaraciones Reactivas 
+- [reactive-declarations](https://svelte.dev/examples#reactive-declarations)
+- [tutorial/reactive-declarations](https://svelte.dev/tutorial/reactive-declarations)
+
+```js
+// declaraciones reactivas 
+// Parecido a las propiedades calculadas o computed en vue.js
+$: doble = contador * 2
+```
+Svelte interpreta como "volver a ejecutar este código, siempre que cambie alguno de los valores referenciados"
+
+Así podemos pintar:
+
+```html
+<h3>El doble es: {doble}</h3>
+```
+
+Otro ejemplo:
+```js
+$: advertencia = contador < 10 ? 'es menor a 10' : 'es mayor o igual a 10'
+```
+```html
+<h3>{contador < 10 ? 'es menor a 10' : 'es mayor o igual a 10'}</h3>
+<h3>{advertencia}</h3>
+```
+
+## $: if
+```js
+let colorText = 'text-primary'
+	
+$: if(contador >=10){
+	colorText = 'text-danger'
+} 
+```
+
 
 ## Próximante...
 Estamos trabando para usted: <br>
