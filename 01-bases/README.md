@@ -135,6 +135,104 @@ $: if(contador >=10){
 } 
 ```
 
+## Bucles
+```html
+<script>
+	
+	let cursos = ['html', 'css', 'js']
+
+</script>
+
+<main>
+	<h1>condicionales y bucles</h1>
+	
+	<ul>
+		{#each cursos as curso, index}
+		<li>{index} - {curso}</li>
+		{/each}
+	</ul>
+
+</main>
+```
+
+- [Número Random](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Math/random#example_using_math.random)
+- Debido a que la reactividad de Svelte se activa mediante asignaciones, el uso de métodos de matriz como ``push`` no generará actualizaciones automáticamente.
+- [Actualizar matrices](https://svelte.dev/tutorial/updating-arrays-and-objects)
+
+```html
+<script>
+	
+	let cursos = ['html', 'css', 'js']
+
+	let numeros = [1, 10, 2]
+
+	const agregar = () => {
+		let num = Math.floor(Math.random() * (20 - 1) + 1)
+		console.log(num)
+		// numeros.push(num)
+		numeros = [...numeros, num]
+	}
+
+</script>
+
+<main class="container mt-5">
+	<h1>condicionales y bucles</h1>
+	
+	<ul>
+		{#each cursos as curso, index}
+		<li>{index} - {curso}</li>
+		{/each}
+	</ul>
+
+	<button on:click={agregar}>Agregar</button>
+	<ul>
+		{#each numeros as numero}
+			 <li>{numero}</li>
+		{/each}
+	</ul>
+	
+</main>
+```
+
+## Condicionales
+```html
+<script>
+	
+	let cursos = ['html', 'css', 'js']
+
+	let numeros = [1, 10, 2]
+
+	const agregar = () => {
+		let num = Math.floor(Math.random() * (20 - 1) + 1)
+		numeros = [...numeros, num]
+	}
+
+</script>
+
+<main class="container mt-5">
+	<h1>condicionales y bucles</h1>
+	
+	<ul>
+		{#each cursos as curso, index}
+		<li>{index} - {curso}</li>
+		{/each}
+	</ul>
+
+	{#if numeros.length > 5}
+		<h3>Agregaste más de 5 números!</h3>
+	{:else}
+		<button on:click={agregar}>Agregar</button>
+	{/if}
+
+	<ul>
+		{#each numeros as numero}
+			 <li>{numero}</li>
+		{/each}
+	</ul>
+	
+</main>
+```
+
 
 ## Próximante...
 Estamos trabando para usted: <br>
