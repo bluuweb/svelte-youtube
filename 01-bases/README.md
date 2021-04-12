@@ -17,6 +17,7 @@ Guía práctica para seguir el curso de Svelte desde cero!
 
 - [beautify](https://marketplace.visualstudio.com/items?itemName=HookyQR.beautify)
 - [dobri theme](https://marketplace.visualstudio.com/items?itemName=sldobri.bunker)
+- [Nu Disco Theme](https://marketplace.visualstudio.com/items?itemName=dbanksdesign.nu-disco)
 - [svelte-vscode](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode)
 
 ## ¿Qué es Svelte?
@@ -489,6 +490,164 @@ npm run build
 Arrastrar carpeta public a:
 - [https://app.netlify.com/](https://app.netlify.com/)
 
-## Próximante... Componentes
+## Componentes
+- [nested-components](https://svelte.dev/tutorial/nested-components)
+
+components/Titulo.svelte
+```html
+<div>
+    <h1>Hola desde un componente</h1>
+</div>
+```
+
+App.svelte
+```html
+<script>
+	
+	import Titulo from './components/Titulo.svelte'
+	
+</script>
+
+<main>
+	
+	<Titulo />
+	<Titulo></Titulo>
+	
+</main>
+```
+
+## Props
+- [declaring-props](https://svelte.dev/tutorial/declaring-props)
+
+components/Titulo.svelte
+```html
+<script>
+    export let saludo = 'props super genial'
+</script>
+
+<div>
+    <h1>Hola: {saludo}</h1>
+</div>
+```
+
+App.svelte
+```html
+<script>
+	
+	import Titulo from './components/Titulo.svelte'
+	
+</script>
+
+<main>
+	
+	<Titulo saludo={'Saludo nuevo 1'} />
+	<Titulo saludo={'Saludo nuevo 2'} />
+	<Titulo  />
+	
+</main>
+```
+
+- [spread-props](https://svelte.dev/tutorial/spread-props)
+
+components/Usuario.svelte
+```html
+<script>
+    export let nombre, edad;
+</script>
+
+<div>
+    <p>Nombre: {nombre}</p>
+    <p>Edad: {edad}</p>
+</div>
+```
+
+App.svelte
+```html
+ <script>
+
+	import Usuario from './components/Usuario.svelte'
+	
+	let user = {
+		nombre: 'Juanito',
+		edad: 20,
+	}
+
+</script>
+
+<main>
+	
+	<Usuario {...user} />
+	
+</main>
+```
+
+## emit
+
+components/Contador.svelte
+```html
+<script>
+    export let numero
+    export let aumentar
+</script>
+
+<div>
+    <button on:click={aumentar}>Aumentar</button>
+    <p>Contador: {numero}</p>
+</div>
+```
+App.svelte
+```html
+<script>
+	
+	import Contador from './components/Contador.svelte'
+
+	let numero = 10
+	const aumentar = () => numero ++
+
+</script>
+
+<main>
+	
+	<Contador {numero} {aumentar} />
+	
+</main>
+```
+
+## Components Bind
+- [component-bindings](https://svelte.dev/tutorial/component-bindings)
+
+components/Contador.svelte
+```html
+<script>
+    export let num = 20
+    export let aumentar
+</script>
+
+<div>
+    <button on:click={aumentar}>Aumentar</button>
+    <p>Contador: {num}</p>
+</div>
+```
+App.svelte
+```html
+<script>
+	
+	import Contador from './components/Contador.svelte'
+
+	let numero
+	const aumentar = () => numero ++
+
+</script>
+
+<main>
+	
+	<!-- <Contador {numero} {aumentar} /> -->
+	<Contador bind:num={numero} {aumentar} />
+	
+</main>
+```
+
+
+## Próximante...
 Estamos trabando para usted: <br>
 <img :src="$withBase('/img/trabajar.gif')">
