@@ -19,6 +19,7 @@ module.exports = {
       [
         '/',
         '/01-bases/',
+        '/02-stores/',
       ]
   }
  

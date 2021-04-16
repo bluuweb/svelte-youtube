@@ -647,7 +647,25 @@ App.svelte
 </main>
 ```
 
+## Más...
+Muchas gracias por llegar hasta acá 👍
 
-## Próximante...
-Estamos trabando para usted: <br>
+Puedes apoyar estos tutoriales y al canal de bluuweb adquiriendo algún curso premium 🙌👌❤
+
+::: tip CURSO EN UDEMY OFERTA!
+Aprende desde cero a trabajar con <b>Bootstrap 5!</b> aquí: [Acceder al curso aquí](http://curso-bootstrap-4-udemy.bluuweb.cl)
+<b>Nos vemos en clases!</b>
+:::
+
+::: tip CURSO EN UDEMY OFERTA!
+Aprende desde cero a trabajar con <b>Vue.js y Firebase</b> aquí: [Acceder al curso aquí](http://curso-vue-js-udemy.bluuweb.cl)
+<b>Nos vemos en clases!</b>
+:::
+
+::: tip CURSO EN UDEMY OFERTA!
+Aprende desde cero a trabajar con <b>React.js y Firebase</b> aquí: [Acceder al curso aquí](http://curso-react-js-udemy.bluuweb.cl)
+<b>Nos vemos en clases!</b>
+:::
+
+
 <img :src="$withBase('/img/trabajar.gif')">
