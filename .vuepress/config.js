@@ -20,6 +20,7 @@ module.exports = {
         '/',
         '/01-bases/',
         '/02-stores/',
+        '/03-router/',
       ]
   }
  
