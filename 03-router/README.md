@@ -232,6 +232,67 @@ const createUser = () => {
 export const user = createUser()
 ```
 
+### Login.svelte
+```html
+<script>
+    import {user} from '../stores/User'
+    import {navigate} from 'svelte-routing'
+    import {auth, provider} from '../firebase'
+    
+    const procesarFormulario = async() => {
+        try {
+            const res = await auth.signInWithPopup(provider)
+            console.log(res)
+            user.setUser(res.user)
+            navigate('/perfil', {replace: true})
+        } catch (error) {
+           console.log(error) 
+        }   
+
+    }
+</script>
+
+<div>
+    <h1>Acceso</h1>
+    <button 
+        type="submit" 
+        on:click={procesarFormulario}
+    >Acceder con Google</button>
+</div>
+```
+
+### Cerrar Sesión
+Navbar.svelte
+```html
+<script>
+    import {Link, navigate} from 'svelte-routing'
+    import {user} from '../stores/User'
+    import {auth} from '../firebase'
+
+    const cerrarSesion = async() => {
+        try {
+            await auth.signOut()
+            user.setUser(null)
+            navigate('/login', {replace: true})
+            
+        } catch (error) {
+            console.log(error)
+        }
+    }
+</script>
+
+<nav>
+    {#if $user}
+        <Link to="/perfil">PERFIL</Link>
+        <button on:click={cerrarSesion}>Cerrar Sesión</button>
+    {:else}
+        <Link to="/">HOME</Link>
+        <Link to="/about">ABOUT</Link>
+        <Link to="/login">LOGIN</Link>
+    {/if}
+</nav>
+```
+
 ### App.svelte
 ```html
 <script>

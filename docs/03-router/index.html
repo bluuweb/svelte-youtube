@@ -7,7 +7,7 @@
     <meta name="generator" content="VuePress 1.5.0">
     
     <meta name="description" content="Aprende a trabajar con Svelte!">
-    <link rel="preload" href="/svelte-youtube/assets/css/0.styles.44371cb6.css" as="style"><link rel="preload" href="/svelte-youtube/assets/js/app.4b69fd55.js" as="script"><link rel="preload" href="/svelte-youtube/assets/js/2.88c4aef7.js" as="script"><link rel="preload" href="/svelte-youtube/assets/js/7.45533486.js" as="script"><link rel="prefetch" href="/svelte-youtube/assets/js/3.c6d9b4fb.js"><link rel="prefetch" href="/svelte-youtube/assets/js/4.ec654b7b.js"><link rel="prefetch" href="/svelte-youtube/assets/js/5.7f69be3f.js"><link rel="prefetch" href="/svelte-youtube/assets/js/6.f2e4aad5.js"><link rel="prefetch" href="/svelte-youtube/assets/js/8.de34fee3.js">
+    <link rel="preload" href="/svelte-youtube/assets/css/0.styles.44371cb6.css" as="style"><link rel="preload" href="/svelte-youtube/assets/js/app.cf49d032.js" as="script"><link rel="preload" href="/svelte-youtube/assets/js/2.88c4aef7.js" as="script"><link rel="preload" href="/svelte-youtube/assets/js/7.9b5793c6.js" as="script"><link rel="prefetch" href="/svelte-youtube/assets/js/3.c6d9b4fb.js"><link rel="prefetch" href="/svelte-youtube/assets/js/4.ec654b7b.js"><link rel="prefetch" href="/svelte-youtube/assets/js/5.17ec8e85.js"><link rel="prefetch" href="/svelte-youtube/assets/js/6.f2e4aad5.js"><link rel="prefetch" href="/svelte-youtube/assets/js/8.6e81ae64.js">
     <link rel="stylesheet" href="/svelte-youtube/assets/css/0.styles.44371cb6.css">
   </head>
   <body>
@@ -198,6 +198,58 @@ firebase<span class="token punctuation">.</span><span class="token function-vari
 <span class="token punctuation">}</span>
 
 <span class="token keyword">export</span> <span class="token keyword">const</span> user <span class="token operator">=</span> <span class="token function">createUser</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre></div><h3 id="login-svelte-2"><a href="#login-svelte-2" class="header-anchor">#</a> Login.svelte</h3> <div class="language-html extra-class"><pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>user<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'../stores/User'</span>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>navigate<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'svelte-routing'</span>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>auth<span class="token punctuation">,</span> provider<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'../firebase'</span>
+    
+    <span class="token keyword">const</span> <span class="token function-variable function">procesarFormulario</span> <span class="token operator">=</span> <span class="token keyword">async</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+        <span class="token keyword">try</span> <span class="token punctuation">{</span>
+            <span class="token keyword">const</span> res <span class="token operator">=</span> <span class="token keyword">await</span> auth<span class="token punctuation">.</span><span class="token function">signInWithPopup</span><span class="token punctuation">(</span>provider<span class="token punctuation">)</span>
+            console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>res<span class="token punctuation">)</span>
+            user<span class="token punctuation">.</span><span class="token function">setUser</span><span class="token punctuation">(</span>res<span class="token punctuation">.</span>user<span class="token punctuation">)</span>
+            <span class="token function">navigate</span><span class="token punctuation">(</span><span class="token string">'/perfil'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>replace<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span>error<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+           console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span> 
+        <span class="token punctuation">}</span>   
+
+    <span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span><span class="token punctuation">&gt;</span></span>Acceso<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h1</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> 
+        <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>submit<span class="token punctuation">&quot;</span></span> 
+        <span class="token attr-name"><span class="token namespace">on:</span>click</span><span class="token attr-value"><span class="token punctuation">=</span>{procesarFormulario}</span>
+    <span class="token punctuation">&gt;</span></span>Acceder con Google<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><h3 id="cerrar-sesion"><a href="#cerrar-sesion" class="header-anchor">#</a> Cerrar Sesión</h3> <p>Navbar.svelte</p> <div class="language-html extra-class"><pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>Link<span class="token punctuation">,</span> navigate<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'svelte-routing'</span>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>user<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'../stores/User'</span>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>auth<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'../firebase'</span>
+
+    <span class="token keyword">const</span> <span class="token function-variable function">cerrarSesion</span> <span class="token operator">=</span> <span class="token keyword">async</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+        <span class="token keyword">try</span> <span class="token punctuation">{</span>
+            <span class="token keyword">await</span> auth<span class="token punctuation">.</span><span class="token function">signOut</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            user<span class="token punctuation">.</span><span class="token function">setUser</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">)</span>
+            <span class="token function">navigate</span><span class="token punctuation">(</span><span class="token string">'/login'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>replace<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+            
+        <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span>error<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>nav</span><span class="token punctuation">&gt;</span></span>
+    {#if $user}
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Link</span> <span class="token attr-name">to</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>/perfil<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>PERFIL<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>Link</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name"><span class="token namespace">on:</span>click</span><span class="token attr-value"><span class="token punctuation">=</span>{cerrarSesion}</span><span class="token punctuation">&gt;</span></span>Cerrar Sesión<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">&gt;</span></span>
+    {:else}
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Link</span> <span class="token attr-name">to</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>/<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>HOME<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>Link</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Link</span> <span class="token attr-name">to</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>/about<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>ABOUT<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>Link</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Link</span> <span class="token attr-name">to</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>/login<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>LOGIN<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>Link</span><span class="token punctuation">&gt;</span></span>
+    {/if}
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>nav</span><span class="token punctuation">&gt;</span></span>
 </code></pre></div><h3 id="app-svelte"><a href="#app-svelte" class="header-anchor">#</a> App.svelte</h3> <div class="language-html extra-class"><pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">
 	<span class="token keyword">import</span> <span class="token punctuation">{</span> Router<span class="token punctuation">,</span> Route <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;svelte-routing&quot;</span><span class="token punctuation">;</span>
 	<span class="token keyword">import</span> Home <span class="token keyword">from</span> <span class="token string">'./views/Home.svelte'</span>
@@ -262,6 +314,6 @@ firebase<span class="token punctuation">.</span><span class="token function-vari
       <a href="/svelte-youtube/02-stores/" class="prev">
         Stores
       </a></span> <!----></p></div> </main></div><div class="global-ui"></div></div>
-    <script src="/svelte-youtube/assets/js/app.4b69fd55.js" defer></script><script src="/svelte-youtube/assets/js/2.88c4aef7.js" defer></script><script src="/svelte-youtube/assets/js/7.45533486.js" defer></script>
+    <script src="/svelte-youtube/assets/js/app.cf49d032.js" defer></script><script src="/svelte-youtube/assets/js/2.88c4aef7.js" defer></script><script src="/svelte-youtube/assets/js/7.9b5793c6.js" defer></script>
   </body>
 </html>
